@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
 
   def index
     #@movies = Movie.all
+    puts("Hello")
     @all_ratings = ['G','PG','PG-13','R']
     if params.has_key?("sort")
         @movies = Movie.order(params["sort"])
