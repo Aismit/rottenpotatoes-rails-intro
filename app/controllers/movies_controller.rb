@@ -16,6 +16,7 @@ class MoviesController < ApplicationController
     if params.has_key?("sort")
         @movies = Movie.order(params["sort"])
     elsif params.has_key?("ratings")
+        puts("jello")
         @Movies = Movie.where(rating: params['ratings'].keys)
     else
         @movies = Movie.all
