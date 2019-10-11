@@ -12,10 +12,11 @@ class MoviesController < ApplicationController
 
   def index
     #@movies = Movie.all
+    @all_ratings = ['G','PG','PG-13','R']
     if params.has_key?("sort")
         @movies = Movie.order(params["sort"])
-
-        #redirect_to movies_path
+    elsif params.has_key?("ratings")
+        @Movies = Movie.where(rating: params['ratings'].keys)
     else
         @movies = Movie.all
     end
