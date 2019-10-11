@@ -15,7 +15,7 @@ class MoviesController < ApplicationController
     #puts("Hello")
     @all_ratings = ['G','PG','PG-13','R']
     #@movies = Movie.all
-    @movies = Movie.where(rating: params['ratings'].keys)
+    @movies = Movie.where(rating: @all_ratings.keys)
     if params.has_key?("sort")
         @movies = Movie.order(params["sort"])
     elsif params.has_key?("ratings")
