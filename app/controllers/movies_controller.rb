@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
     #@movies = Movie.all
     if params.has_key?("sort")
         @movies = Movie.order(params["sort"])
-        redirect_to movies_path
+        #redirect_to movies_path
     else
         @movies = Movie.all
     end
