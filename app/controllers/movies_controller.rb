@@ -19,7 +19,7 @@ class MoviesController < ApplicationController
     if session.has_key?("ratings")
         puts("HJSFD")
         puts("HELELLELLELELELEL")
-        puts(session)
+        puts(session["ratings"])
     end
 
     if params.has_key?("ratings")
