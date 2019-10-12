@@ -15,11 +15,12 @@ class MoviesController < ApplicationController
 
     #@movies = Movie.where(rating: @all_ratings)
     @rating_choices = @all_ratings
+
     if params.has_key?("sort")
         @movies = Movie.order(params["sort"])
     end
     if params.has_key?("ratings")
-        @rating_choices = Movie.where(rating: params['ratings'].keys)
+        @rating_choices = params['ratings'].keys
     end
     @movies = Movie.where(rating: @rating_choices)
   end
