@@ -67,7 +67,7 @@ class MoviesController < ApplicationController
         session["sort"] = params["sort"]
         if session.has_key?("utf8")
             params["utf8"] = session["utf8"]
-            redirect_to movies_path(params: params["utf8"], ratings: params["ratings"], sort: params["sort"])
+            redirect_to movies_path(ratings: params["ratings"], sort: params["sort"])
         else
             redirect_to movies_path(ratings: params["ratings"], sort: params["sort"])
         end
