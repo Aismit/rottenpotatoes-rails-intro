@@ -22,7 +22,7 @@ class MoviesController < ApplicationController
     else
         @movies = Movie.where(@rating_choices.keys)
     end
-    @movies = Movie.where(@rating_choices.keys)
+    @movies = Movie.where(rating: @rating_choices)
   end
 
   def new
