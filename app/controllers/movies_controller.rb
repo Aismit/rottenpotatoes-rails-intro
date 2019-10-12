@@ -39,11 +39,11 @@ class MoviesController < ApplicationController
         session["ratings"] = params["ratings"]
         session["utf8"] = params["utf8"]
     end
+    @movies = Movie.where(rating: @rating_choices)
     if params.has_key?("sort")
         @movies = Movie.order(params["sort"])
         session["sort"] = params["sort"]
     end
-    @movies = Movie.where(rating: @rating_choices)
     puts(@movies)
     puts(params.keys)
     puts(session.keys)
