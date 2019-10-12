@@ -15,7 +15,13 @@ class MoviesController < ApplicationController
 
     #@movies = Movie.where(rating: @all_ratings)
     @rating_choices = @all_ratings
-    
+
+    if session.has_key?("ratings") & session.has_key?("sort")
+        @movies = Movies.order(session["sort"])
+        @movies = @movies.where(rating: session["ratings"].keys)
+    end
+
+
     if params.has_key?("ratings")==false && session.has_key?("ratings")
         @rating_choices = session["ratings"]
         params["ratings"] = session["ratings"]
@@ -53,9 +59,9 @@ class MoviesController < ApplicationController
            redirect_to movies_path(params: params["utf8"], ratings: params["ratings"])
         end
     end
-    @movies = Movie.where(rating: @rating_choices)
+    #@movies = Movie.where(rating: @rating_choices)
     if params.has_key?("sort")
-        @movies = @movies.order(params["sort"])
+        #@movies = @movies.order(params["sort"])
         session["sort"] = params["sort"]
         if session.has_key?("utf8")
             params["utf8"] = sort["utf8"]
