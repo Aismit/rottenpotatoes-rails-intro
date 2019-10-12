@@ -15,12 +15,6 @@ class MoviesController < ApplicationController
 
     #@movies = Movie.where(rating: @all_ratings)
     @rating_choices = @all_ratings
-
-    if params.has_key?("ratings")==false && params.has_key?("sort")==false && session.has_key?("ratings")==false and session.has_key?("sort")==false
-        @movie = Movie.all
-    end
-
-
     if params.has_key?("ratings")==false && session.has_key?("ratings")
         @rating_choices = session["ratings"]
         params["ratings"] = session["ratings"]
@@ -49,54 +43,97 @@ class MoviesController < ApplicationController
        return
     end
 
-    if params.has_key?("ratings") && params.has_key?("sort")
-        puts("problem 3")
-        @movies = Movie.order(params["sort"])
-        @movies = @movies.where(rating: params["ratings"].keys)
-    end
-
-    if params.has_key?("ratings")==false && params.has_key?("sort")
-        puts("problem 2")
-        @movies = Movie.order(params["sort"])
-        #@movies = @movies.where(rating: params["ratings"].keys)
-    end
-
-    if params.has_key?("ratings") && params.has_key?("sort")==false
-        puts("problem 1")
-        @movies = Movie.where(rating:params["ratings"].keys)
-            #@movies = @movies.where(rating: params["ratings"].keys)
-    end
-
-    if params.has_key?("ratings")==false && params.has_key?("sort")==false
-        @movies = Movie.all
-    end
-
     if params.has_key?("ratings")
         @rating_choices = params["ratings"].keys
         session["ratings"] = params["ratings"]
         session["utf8"] = params["utf8"]
-        puts(session["ratings"])
-        puts(session["utf8"])
-        if session.has_key?("sort")
-            params["sort"] = session["sort"]
-            redirect_to movies_path(ratings: params["ratings"], sort:params["sort"])
-        else
-           redirect_to movies_path(ratings: params["ratings"])
-        end
-        return
     end
-    #@movies = Movie.where(rating: @rating_choices)
+    @movies = Movie.where(rating: @rating_choices)
     if params.has_key?("sort")
-        #@movies = @movies.order(params["sort"])
+        @movies = @movies.order(params["sort"])
         session["sort"] = params["sort"]
-        if session.has_key?("ratings")
-            params["utf8"] = session["utf8"]
-            redirect_to movies_path(ratings: params["ratings"], sort: params["sort"])
-        else
-            redirect_to movies_path(sort: params["sort"])
-        end
-        return
     end
+#     if params.has_key?("ratings")==false && params.has_key?("sort")==false && session.has_key?("ratings")==false and session.has_key?("sort")==false
+#         @movie = Movie.all
+#     end
+
+
+#     if params.has_key?("ratings")==false && session.has_key?("ratings")
+#         @rating_choices = session["ratings"]
+#         params["ratings"] = session["ratings"]
+#         if params.has_key?("sort") && session.has_key?("sort")==false
+#             redirect_to movies_path(utf8:session["utf8"], sort: params["sort"], ratings: session["ratings"])
+#         end
+#         return
+#
+# #         if params.has_key?("sort") && session.has_key?("sort")
+# #             redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
+# #         end
+# #         if params.has_key("sort")==false && session.has_key?("sort")
+# #             redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
+# #         end
+# #         if params.has_key("sort")==false && session.has_key?("sort")==false
+# #             redirect_to movies_path(utf8:session["ut-tags"], ratings: session["ratings"])
+# #         end
+#         #return
+#     end
+
+#     if params.has_key?("sort")==false && session.has_key?("sort")
+#        params["sort"] = session["sort"]
+#        if params.has_key?("ratings") && session.has_key?("ratings")==false
+#            redirect_to movies_path(sort: params["sort"], ratings: params["ratings"])
+#        end
+#        return
+#     end
+#
+#     if params.has_key?("ratings") && params.has_key?("sort")
+#         puts("problem 3")
+#         @movies = Movie.order(params["sort"])
+#         @movies = @movies.where(rating: params["ratings"].keys)
+#     end
+#
+#     if params.has_key?("ratings")==false && params.has_key?("sort")
+#         puts("problem 2")
+#         @movies = Movie.order(params["sort"])
+#         #@movies = @movies.where(rating: params["ratings"].keys)
+#     end
+#
+#     if params.has_key?("ratings") && params.has_key?("sort")==false
+#         puts("problem 1")
+#         @movies = Movie.where(rating:params["ratings"].keys)
+#             #@movies = @movies.where(rating: params["ratings"].keys)
+#     end
+#
+#     if params.has_key?("ratings")==false && params.has_key?("sort")==false
+#         @movies = Movie.all
+#     end
+
+#     if params.has_key?("ratings")
+#         @rating_choices = params["ratings"].keys
+#         session["ratings"] = params["ratings"]
+#         session["utf8"] = params["utf8"]
+#         puts(session["ratings"])
+#         puts(session["utf8"])
+#         if session.has_key?("sort")
+#             params["sort"] = session["sort"]
+#             redirect_to movies_path(ratings: params["ratings"], sort:params["sort"])
+#         else
+#            redirect_to movies_path(ratings: params["ratings"])
+#         end
+#         return
+#     end
+#     #@movies = Movie.where(rating: @rating_choices)
+#     if params.has_key?("sort")
+#         #@movies = @movies.order(params["sort"])
+#         session["sort"] = params["sort"]
+#         if session.has_key?("ratings")
+#             params["utf8"] = session["utf8"]
+#             redirect_to movies_path(ratings: params["ratings"], sort: params["sort"])
+#         else
+#             redirect_to movies_path(sort: params["sort"])
+#         end
+#         return
+#     end
 
 
     #puts(@movies)
@@ -124,32 +161,33 @@ class MoviesController < ApplicationController
 #         @movies = Movie.order(rating:params["sort"])
 #         params["sort"] = session["sort"]
 #         if params.has_key?("ratings") && session.has_key?("ratings")==false:
-#             redirect_to movies_path(sort: session["sort"])
+#             redirect_to movies_path(sort: session["sort"], rating: para)
 #         end
-#         if params.has_key?("ratings")==false && session.has_key?("ratings")
-#             redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
-#         end
-#         if params.has_key?("ratings")==false && session.has_key?("ratings")==false
-#             redirect_to movies_path(sort: session["sort"])
-#         end
-#         if params.has_key?("ratings") && session.has_key?("ratings")
-#             redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
-#         end
+# #         if params.has_key?("ratings")==false && session.has_key?("ratings")
+# #             redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
+# #         end
+# #         if params.has_key?("ratings")==false && session.has_key?("ratings")==false
+# #             redirect_to movies_path(sort: session["sort"])
+# #         end
+# #         if params.has_key?("ratings") && session.has_key?("ratings")
+# #             redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
+# #         end
 #         return
-    #end
+    end
 
-#     if params.has_key?("ratings")==false && session.has_key?("ratings")
-#         @rating_choices = session["ratings"]
-#         params["ratings"] = session["ratings"]
-#     end
-#     if params.has_key?("sort")
-#         @movies = Movie.order(params["sort"])
-#     end
-#     if params.has_key?("ratings")
-#         @rating_choices = params['ratings'].keys
-#         session["ratings"] = @rating_choices
-#     end
-#     @movies = Movie.where(rating: @rating_choices)
+    if params.has_key?("ratings")==false && session.has_key?("ratings")
+        @rating_choices = session["ratings"]
+        params["ratings"] = session["ratings"]
+    end
+    if params.has_key?("sort")
+        @movies = Movie.order(params["sort"])
+    end
+    if params.has_key?("ratings")
+        @rating_choices = params['ratings'].keys
+        session["ratings"] = @rating_choices
+    end
+    @movies = Movie.where(rating: @rating_choices)
+    redirect_to movies_path(sort: session["sort"])
   end
 
   def new
