@@ -16,7 +16,7 @@ class MoviesController < ApplicationController
     #@movies = Movie.where(rating: @all_ratings)
     @rating_choices = @all_ratings
 
-    if session.has_key?("ratings") & session.has_key?("sort")
+    if session.has_key?("ratings") && session.has_key?("sort")
         @movies = Movie.order(session["sort"])
         @movies = @movies.where(rating: session["ratings"].keys)
     end
