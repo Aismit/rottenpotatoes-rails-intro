@@ -17,6 +17,8 @@ class MoviesController < ApplicationController
     @rating_choices = @all_ratings
 
     if session.has_key?("ratings")
+        puts("HJSFD")
+        puts("HELELLELLELELELEL")
         puts(session)
     end
 
