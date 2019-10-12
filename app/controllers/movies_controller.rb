@@ -16,10 +16,8 @@ class MoviesController < ApplicationController
     #@movies = Movie.where(rating: @all_ratings)
     @rating_choices = @all_ratings
 
-    if session.has_key?("ratings")
-        puts("HJSFD")
-        puts("HELELLELLELELELEL")
-        puts(session["ratings"])
+    if params.has_key?("ratings")==false && session.has_key?("ratings")
+        puts("hellosdfasf")
     end
 
     if params.has_key?("ratings")
