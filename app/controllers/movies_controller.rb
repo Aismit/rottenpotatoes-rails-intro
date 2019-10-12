@@ -41,7 +41,7 @@ class MoviesController < ApplicationController
     end
     @movies = Movie.where(rating: @rating_choices)
     if params.has_key?("sort")
-        @movies = Movie.order(params["sort"])
+        @movies = @movies.order(params["sort"])
         session["sort"] = params["sort"]
     end
     puts(@movies)
