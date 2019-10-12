@@ -16,6 +16,10 @@ class MoviesController < ApplicationController
     #@movies = Movie.where(rating: @all_ratings)
     @rating_choices = @all_ratings
 
+    if session.has_key?("ratings")
+        puts(session)
+    end
+
     if params.has_key?("ratings")
         @rating_choices = params["ratings"].keys
         session["ratings"] = params["ratings"]
@@ -26,6 +30,7 @@ class MoviesController < ApplicationController
         session["sort"] = params["sort"]
     end
     @movies = Movie.where(rating: @rating_choices)
+
 #     if params.has_key?("ratings")==false && session.has_key?("ratings"):
 #         @rating_choices = session["ratings"].keys
 #         @movies = @movies.where(rating: rating_choices)
