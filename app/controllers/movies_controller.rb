@@ -17,16 +17,19 @@ class MoviesController < ApplicationController
     @rating_choices = @all_ratings
 
     if params.has_key?("ratings") && params.has_key?("sort")
+        puts("problem 3")
         @movies = Movie.order(params["sort"])
         @movies = @movies.where(rating: params["ratings"].keys)
     end
 
     if params.has_key?("ratings")==false && params.has_key?("sort")
+        puts("problem 2")
         @movies = Movie.order(params["sort"])
         #@movies = @movies.where(rating: params["ratings"].keys)
     end
 
     if params.has_key?("ratings") && params.has_key?("sort")==false
+        puts("problem 1")
         @movies = Movie.where(params["ratings"].keys)
             #@movies = @movies.where(rating: params["ratings"].keys)
     end
