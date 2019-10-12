@@ -27,7 +27,7 @@ class MoviesController < ApplicationController
     end
 
     if params.has_key?("ratings") && params.has_key?("sort")==false
-        @movies = Movie.where(params["ratings".keys])
+        @movies = Movie.where(params["ratings"].keys)
             #@movies = @movies.where(rating: params["ratings"].keys)
     end
 
