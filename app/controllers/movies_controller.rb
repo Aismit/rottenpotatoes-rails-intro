@@ -16,28 +16,6 @@ class MoviesController < ApplicationController
     #@movies = Movie.where(rating: @all_ratings)
     @rating_choices = @all_ratings
 
-    if params.has_key?("ratings") && params.has_key?("sort")
-        puts("problem 3")
-        @movies = Movie.order(params["sort"])
-        @movies = @movies.where(rating: params["ratings"].keys)
-    end
-
-    if params.has_key?("ratings")==false && params.has_key?("sort")
-        puts("problem 2")
-        @movies = Movie.order(params["sort"])
-        #@movies = @movies.where(rating: params["ratings"].keys)
-    end
-
-    if params.has_key?("ratings") && params.has_key?("sort")==false
-        puts("problem 1")
-        @movies = Movie.where(rating:params["ratings"].keys)
-            #@movies = @movies.where(rating: params["ratings"].keys)
-    end
-
-    if params.has_key?("ratings")==false && params.has_key?("sort")==false
-        @movies = Movie.all
-    end
-
 
 
     if params.has_key?("ratings")==false && session.has_key?("ratings")
@@ -67,6 +45,28 @@ class MoviesController < ApplicationController
        end
        return
     end
+    
+    if params.has_key?("ratings") && params.has_key?("sort")
+        puts("problem 3")
+        @movies = Movie.order(params["sort"])
+        @movies = @movies.where(rating: params["ratings"].keys)
+    end
+
+    if params.has_key?("ratings")==false && params.has_key?("sort")
+        puts("problem 2")
+        @movies = Movie.order(params["sort"])
+        #@movies = @movies.where(rating: params["ratings"].keys)
+    end
+
+    if params.has_key?("ratings") && params.has_key?("sort")==false
+        puts("problem 1")
+        @movies = Movie.where(rating:params["ratings"].keys)
+            #@movies = @movies.where(rating: params["ratings"].keys)
+    end
+
+    if params.has_key?("ratings")==false && params.has_key?("sort")==false
+        @movies = Movie.all
+    end
 
     if params.has_key?("ratings")
         @rating_choices = params["ratings"].keys
@@ -94,6 +94,8 @@ class MoviesController < ApplicationController
         end
         return
     end
+
+
     #puts(@movies)
     #puts(params.keys)
     #puts(session.keys)
