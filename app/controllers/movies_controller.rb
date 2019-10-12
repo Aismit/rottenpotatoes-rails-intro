@@ -26,40 +26,40 @@ class MoviesController < ApplicationController
         session["sort"] = params["sort"]
     end
     @movies = Movie.where(rating: @rating_choices)
-    if params.has_key?("ratings")==false && session.has_key?("ratings"):
-        @rating_choices = session["ratings"].keys
-        @movies = @movies.where(rating: rating_choices)
-        if params.has_key?("sort") && session.has_key?("sort")==false
-            redirect_to movies_path(utf8:session["ut-tags"], sort: params["sort"], ratings: session["ratings"])
-        end
-        if params.has_key?("sort") && session.has_key?("sort")
-            redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
-        end
-        if params.has_key("sort")==false && session.has_key?("sort")
-            redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
-        end
-        if params.has_key("sort")==false && session.has_key?("sort")==false
-            redirect_to movies_path(utf8:session["ut-tags"], ratings: session["ratings"])
-        end
-        return
-    end
-    if params.has_key?("sort")==false && session.has_key?("sort"):
-        @movies = Movie.order(rating:params["sort"])
-        params["sort"] = session["sort"]
-        if params.has_key?("ratings") && session.has_key?("ratings")==false:
-            redirect_to movies_path(sort: session["sort"])
-        end
-        if params.has_key?("ratings")==false && session.has_key?("ratings")
-            redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
-        end
-        if params.has_key?("ratings")==false && session.has_key?("ratings")==false
-            redirect_to movies_path(sort: session["sort"])
-        end
-        if params.has_key?("ratings") && session.has_key?("ratings")
-            redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
-        end
-        return
-    end
+#     if params.has_key?("ratings")==false && session.has_key?("ratings"):
+#         @rating_choices = session["ratings"].keys
+#         @movies = @movies.where(rating: rating_choices)
+#         if params.has_key?("sort") && session.has_key?("sort")==false
+#             redirect_to movies_path(utf8:session["ut-tags"], sort: params["sort"], ratings: session["ratings"])
+#         end
+#         if params.has_key?("sort") && session.has_key?("sort")
+#             redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
+#         end
+#         if params.has_key("sort")==false && session.has_key?("sort")
+#             redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
+#         end
+#         if params.has_key("sort")==false && session.has_key?("sort")==false
+#             redirect_to movies_path(utf8:session["ut-tags"], ratings: session["ratings"])
+#         end
+#         return
+#     end
+#     if params.has_key?("sort")==false && session.has_key?("sort"):
+#         @movies = Movie.order(rating:params["sort"])
+#         params["sort"] = session["sort"]
+#         if params.has_key?("ratings") && session.has_key?("ratings")==false:
+#             redirect_to movies_path(sort: session["sort"])
+#         end
+#         if params.has_key?("ratings")==false && session.has_key?("ratings")
+#             redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
+#         end
+#         if params.has_key?("ratings")==false && session.has_key?("ratings")==false
+#             redirect_to movies_path(sort: session["sort"])
+#         end
+#         if params.has_key?("ratings") && session.has_key?("ratings")
+#             redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
+#         end
+#         return
+    #end
 
 #     if params.has_key?("ratings")==false && session.has_key?("ratings")
 #         @rating_choices = session["ratings"]
