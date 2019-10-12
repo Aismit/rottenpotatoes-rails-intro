@@ -20,7 +20,7 @@ class MoviesController < ApplicationController
         @rating_choices = session["ratings"]
         params["ratings"] = session["ratings"]
         if params.has_key?("sort") && session.has_key?("sort")==false
-            redirect_to movies_path(utf8:session["ut-tags"], sort: params["sort"], ratings: session["ratings"])
+            redirect_to movies_path(utf8:session["utf8"], sort: params["sort"], ratings: session["ratings"])
         end
 #         if params.has_key?("sort") && session.has_key?("sort")
 #             redirect_to movies_path(utf8:session["ut-tags"], sort: session["sort"], ratings: session["ratings"])
@@ -37,7 +37,7 @@ class MoviesController < ApplicationController
     if params.has_key?("ratings")
         @rating_choices = params["ratings"].keys
         session["ratings"] = params["ratings"]
-        session["ut-tags"] = params["utf8"]
+        session["utf8"] = params["utf8"]
     end
     if params.has_key?("sort")
         @movies = Movie.order(params["sort"])
