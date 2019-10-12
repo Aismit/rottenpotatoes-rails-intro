@@ -31,6 +31,9 @@ class MoviesController < ApplicationController
             #@movies = @movies.where(rating: params["ratings"].keys)
     end
 
+    if params.has_key?("ratings")==false && params.has_key?("sort")==false
+        @movies = Movie.all
+
 
 
     if params.has_key?("ratings")==false && session.has_key?("ratings")
