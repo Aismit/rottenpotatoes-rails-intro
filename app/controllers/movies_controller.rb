@@ -33,6 +33,7 @@ class MoviesController < ApplicationController
 
     if params.has_key?("ratings")==false && params.has_key?("sort")==false
         @movies = Movie.all
+    end
 
 
 
