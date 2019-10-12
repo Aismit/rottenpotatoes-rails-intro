@@ -11,18 +11,16 @@ class MoviesController < ApplicationController
   end
 
   def index
-    #@movies = Movie.all
-    #puts("Hello")
     @all_ratings = ['G','PG','PG-13','R']
     #@movies = Movie.all
-    @default_choices = Movie.where(rating: @all_ratings)
-    #@movies = Movie.where(rating: @all_ratings)
+
+    #@default_choices = Movie.where(rating: @all_ratings)
+    @movies = Movie.where(rating: @all_ratings)
+
     if params.has_key?("sort")
         @movies = Movie.order(params["sort"])
     elsif params.has_key?("ratings")
-        #puts("jello")
         @movies = Movie.where(rating: params['ratings'].keys)
-        #puts(@Movies)
     else
         @movies = Movie.all
     end
