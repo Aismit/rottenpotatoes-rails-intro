@@ -22,7 +22,7 @@ class MoviesController < ApplicationController
         session["ut-tags"] = params["utf8"]
     end
     if params.has_key?("sort")
-        @movies = Movie.order(rating:params["sort"])
+        @movies = Movie.order(params["sort"])
         session["sort"] = params["sort"]
     end
     @movies = Movie.where(rating: @rating_choices)
