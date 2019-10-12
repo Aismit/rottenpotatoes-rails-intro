@@ -56,9 +56,9 @@ class MoviesController < ApplicationController
         puts(session["utf8"])
         if session.has_key?("sort")
             params["sort"] = session["sort"]
-            redirect_to movies_path(params: params["utf8"], ratings: params["ratings"], sort:params["sort"])
+            redirect_to movies_path(ratings: params["ratings"], sort:params["sort"])
         else
-           redirect_to movies_path(params: params["utf8"], ratings: params["ratings"])
+           redirect_to movies_path(ratings: params["ratings"])
         end
     end
     #@movies = Movie.where(rating: @rating_choices)
