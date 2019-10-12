@@ -30,7 +30,7 @@ class MoviesController < ApplicationController
 
     if params.has_key?("ratings") && params.has_key?("sort")==false
         puts("problem 1")
-        @movies = Movie.where(params["ratings"].keys)
+        @movies = Movie.where(rating:params["ratings"].keys)
             #@movies = @movies.where(rating: params["ratings"].keys)
     end
 
